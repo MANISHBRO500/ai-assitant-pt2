@@ -86,7 +86,7 @@ async function handleTaskCreation(query) {
   };
   
   try {
-    const response = await fetch('https://ai-assitant-pt2.onrender.com/api/tasks', {
+    const response = await fetch('/api/tasks', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
