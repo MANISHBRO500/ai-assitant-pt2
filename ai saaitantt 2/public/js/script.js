@@ -56,7 +56,7 @@ async function processQuery(query) {
   
   // Send to DeepSeek API
   try {
-    const response = await fetch('https://manishbro500.github.io//api/chat', {
+    const response = await fetch('//api/chat', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
