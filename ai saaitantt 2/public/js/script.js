@@ -86,7 +86,7 @@ async function handleTaskCreation(query) {
   };
   
   try {
-    const response = await fetch('/api/tasks', {
+    const response = await fetch('https://manishbro500.github.io//api/tasks', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
