@@ -1,3 +1,6 @@
+// Configuration
+const BACKEND_URL = 'https://ai-assitant-pt2.onrender.com';
+
 // DOM Elements
 const userInput = document.getElementById('userInput');
 const sendButton = document.getElementById('sendButton');
@@ -56,7 +59,7 @@ async function processQuery(query) {
   
   // Send to DeepSeek API
   try {
-    const response = await fetch('https://manishbro500.github.io//api/chat', {
+    const response = await fetch(`${BACKEND_URL}/api/chat`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -64,17 +67,21 @@ async function processQuery(query) {
       body: JSON.stringify({ prompt: query })
     });
     
+    if (!response.ok) {
+      throw new Error(`Server responded with status ${response.status}`);
+    }
+    
     const data = await response.json();
     displayResponse(`Assistant: ${data.response}`);
     speakResponse(data.response);
   } catch (error) {
+    console.error('API Error:', error);
     displayResponse(`Error: ${error.message}`);
   }
 }
 
 // Task Management
 async function handleTaskCreation(query) {
-  // Simple parsing - in a real app you'd use more sophisticated NLP
   const taskText = query.replace(/add task/gi, '').trim();
   const now = new Date();
   
@@ -86,7 +93,7 @@ async function handleTaskCreation(query) {
   };
   
   try {
-    const response = await fetch('https://manishbro500.github.io//api/tasks', {
+    const response = await fetch(`${BACKEND_URL}/api/tasks`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -94,19 +101,28 @@ async function handleTaskCreation(query) {
       body: JSON.stringify(task)
     });
     
+    if (!response.ok) {
+      throw new Error(`Server responded with status ${response.status}`);
+    }
+    
     const newTask = await response.json();
     displayResponse(`Assistant: Task "${newTask.title}" added successfully.`);
     loadTasks();
   } catch (error) {
+    console.error('Task Creation Error:', error);
     displayResponse(`Error adding task: ${error.message}`);
   }
 }
 
 async function loadTasks() {
   try {
-    const response = await fetch('/api/tasks');
-    const tasks = await response.json();
+    const response = await fetch(`${BACKEND_URL}/api/tasks`);
     
+    if (!response.ok) {
+      throw new Error(`Server responded with status ${response.status}`);
+    }
+    
+    const tasks = await response.json();
     tasksList.innerHTML = '';
     tasks.forEach(task => {
       const li = document.createElement('li');
@@ -118,6 +134,7 @@ async function loadTasks() {
     });
   } catch (error) {
     console.error('Error loading tasks:', error);
+    displayResponse(`Error loading tasks: ${error.message}`);
   }
 }
 
