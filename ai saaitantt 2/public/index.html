@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Assistant</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="assistant-container">
+    <div class="display-panel">
+      <div class="time-date">
+        <h1 id="time">00:00</h1>
+        <p id="date">Monday, January 1</p>
+      </div>
+      <div class="task-list" id="taskList">
+        <h2>Today's Tasks</h2>
+        <ul id="tasks"></ul>
+      </div>
+      <div class="response-display" id="responseDisplay"></div>
+    </div>
+    
+    <div class="input-section">
+      <button id="voiceButton" class="mic-button">🎤</button>
+      <input type="text" id="userInput" placeholder="Type your query or click mic...">
+      <button id="sendButton">Send</button>
+    </div>
+  </div>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
